@@ -13,6 +13,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 
 import com.example.victor.less2811.R;
@@ -25,6 +27,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SongsView{
+
+    public static Intent newIntent(Context context){
+        return new Intent(context, MainActivity.class);
+    }
 
     private PlayBackService mService;
     private boolean mBound = false;
@@ -43,8 +49,20 @@ public class MainActivity extends AppCompatActivity implements SongsView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation translateAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.activicy_in);
+                mProgressBar.startAnimation(translateAnimation);
+            }
+        }, 2000);
+
+
         mPresenter.onAttachView(this);
-        mPresenter.loadAllSongs();
+//        mPresenter.loadAllSongs();
 
         Intent playBackIntent = PlayBackService.newInstanse(this);
         playBackIntent.setAction(PlayBackService.ACTION_PLAY);
