@@ -1,5 +1,6 @@
 package com.example.victor.less2811.views;
 
+import android.animation.ObjectAnimator;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -55,8 +56,15 @@ public class MainActivity extends AppCompatActivity implements SongsView{
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Animation translateAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.activicy_in);
-                mProgressBar.startAnimation(translateAnimation);
+//                Animation translateAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.activicy_in);
+//                mProgressBar.startAnimation(translateAnimation);
+
+                //ObjectAnimator animator = ObjectAnimator.ofFloat(mProgressBar,View.ALPHA,0,1);
+                mProgressBar.setVisibility(View.VISIBLE);
+                ObjectAnimator animator = ObjectAnimator.ofFloat(mProgressBar,View.TRANSLATION_Y,-500,0);
+                animator.setDuration(4000);
+                animator.start();
+
             }
         }, 2000);
 
