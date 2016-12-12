@@ -9,7 +9,11 @@ import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuAdapter;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.victor.less2811.R;
 import com.example.victor.less2811.models.Song;
@@ -26,8 +30,13 @@ public class MainActivity extends AppCompatActivity implements SongsView{
     private boolean mBound = false;
 
     public static final String TAG = "Main: ";
+    private static final int SPAN_COUNT = 2;
+
 
     private SongsPresenter mPresenter = new SongsPresenter();
+
+    private RecyclerView mRecyclerView = null;
+    private ProgressBar mProgressBar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +107,19 @@ public class MainActivity extends AppCompatActivity implements SongsView{
 
     @Override
     public void onAllSongsLoaded(List<Song> songList) {
-        Log.d(TAG, "songs loaded");
-        Song [] array = new Song[songList.size()];
-        System.out.println("Main_resu: " + Arrays.toString(songList.toArray(array)));
+        final RecyclerView.LayoutManager manager = new GridLayoutManager(
+                this,
+                SPAN_COUNT);
+        mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.setHasFixedSize(true);
+        final SongsAdapter adapter = new SongsAdapter();
+        adapter.setDataSource(songList);
+        mProgressBar.setVisibility(View.GONE);
+        mRecyclerView.setAdapter(adapter);
+
+
+//        Log.d(TAG, "songs loaded");
+//        Song [] array = new Song[songList.size()];
+//        System.out.println("Main_resu: " + Arrays.toString(songList.toArray(array)));
     }
 }

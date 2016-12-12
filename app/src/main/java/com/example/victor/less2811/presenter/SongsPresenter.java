@@ -21,13 +21,13 @@ public class SongsPresenter {
     }
 
     public void loadAllSongs() {
-        List<Song> songs = SongLoader.getAllSongs(mView.getContext());
+        List<Song> songs = SongRepos.getAllSongs(mView.getContext());
 
         new AsyncTask<Void, Void, List<Song>>() {
             @Override
             protected List<Song> doInBackground(Void... voids) {
                 try{
-                 return SongLoader.getAllSongs(mView.getContext());
+                 return SongRepos.getAllSongs(mView.getContext());
                 }catch (Exception e){
                     e.printStackTrace();
                 }

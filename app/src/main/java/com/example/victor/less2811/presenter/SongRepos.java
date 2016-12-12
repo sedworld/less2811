@@ -15,7 +15,7 @@ import com.example.victor.less2811.models.Song;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongLoader {
+public class SongRepos {
 
     private static final long[] sEmptyList = new long[0];
 
