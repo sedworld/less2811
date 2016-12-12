@@ -53,21 +53,22 @@ public class MainActivity extends AppCompatActivity implements SongsView{
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-//                Animation translateAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.activicy_in);
-//                mProgressBar.startAnimation(translateAnimation);
-
-                //ObjectAnimator animator = ObjectAnimator.ofFloat(mProgressBar,View.ALPHA,0,1);
-                mProgressBar.setVisibility(View.VISIBLE);
-                ObjectAnimator animator = ObjectAnimator.ofFloat(mProgressBar,View.TRANSLATION_Y,-500,0);
-                animator.setDuration(4000);
-                animator.start();
-
-            }
-        }, 2000);
-
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+////                Animation translateAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.activicy_in);
+////                mProgressBar.startAnimation(translateAnimation);
+//
+//                //ObjectAnimator animator = ObjectAnimator.ofFloat(mProgressBar,View.ALPHA,0,1);
+//                mProgressBar.setVisibility(View.VISIBLE);
+//                ObjectAnimator animator = ObjectAnimator.ofFloat(mProgressBar,View.TRANSLATION_Y,-500,0);
+//                animator.setDuration(4000);
+//                animator.start();
+//
+//            }
+//        }, 2000);
+        mProgressBar.setAlpha(0);
+        mProgressBar.animate().alpha(1).setDuration(1000).start();
 
         mPresenter.onAttachView(this);
 //        mPresenter.loadAllSongs();
